@@ -1,0 +1,24 @@
+=================WEB=======================
+
+1. controller
+
+
+
+
+=================DOMAIN=====================
+
+1. service
+2. repository
+3. DOMAIN
+
+
+
+================대원칙=======================
+
+1. web은 domain을 바라볼 수 있다.
+2. domain은 web을 바라봐서는 안된다.
+
+ex) 
+
+controller -> service, repository
+service, repository -> controller (x)
