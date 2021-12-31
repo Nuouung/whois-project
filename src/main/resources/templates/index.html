@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/css/common.css">
 </head>
-<body>
-<a th:href="@{/member/join}">회원가입 창으로 이동</a> <br>
-<a th:text="${#session}? |로그아웃| : |로그인 창으로 이동|" th:href="${#session}? @{/logout} : @{/login}">로그인 창으로 이동</a>
-</body>
+	<body class="view-size">
+		<a th:href="@{/member/join}">회원가입 창으로 이동</a> <br>
+		<a th:text="${#session}? |로그아웃| : |로그인 창으로 이동|" th:href="${#session}? @{/logout} : @{/login}">로그인 창으로 이동</a>
+	</body>
 </html>
