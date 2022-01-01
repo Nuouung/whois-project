@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>연습용 사이트</title>
+    <style>
+        form {
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        input {
+            margin: 10px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section>
+            <form action="../index.html" th:action th:object="${member}" method="post">
+                <label>이메일</label>
+                <input type="text" name="userId" th:field="*{email}">
+                <label>비밀번호</label>
+                <input type="password" th:field="*{password}">
+                <label>이름</label>
+                <input type="text" th:field="*{name}">
+                <label>전화번호</label>
+                <input type="text" th:field="*{phoneNumber}">
+                <label>생일</label>
+                <input type="date" th:field="*{birthday}">
+                <label>성별 (m/f)</label>
+                <input type="text" th:field="*{gender}">
+                <button type="submit">회원가입</button>
+            </form>
+            <button class="form_button" th:onclick="|location.href='@{/}'|">홈으로</button>
+        </section>
+    </main>
+</body>
+</html>
