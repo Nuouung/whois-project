@@ -22,20 +22,15 @@ public class MemberController {
         return "member/joinForm";
     }
 
+    @GetMapping("/join_s")
+    public String memberJoinForm_s(Model model) {
+        model.addAttribute("member", new MemberDto());
+        return "member/joinForm_s";
+    }
+
     @PostMapping("/join")
     public String memberJoin(@ModelAttribute MemberDto member) {
         memberService.saveMember(member);
-        return "redirect:/";
-    }
-
-    @GetMapping("/join_s")
-    public String memberJoinForm_s() {
-        return "member/join_s";
-    }
-
-    @PostMapping("/join_s")
-    public String memberJoinForm_s(MemberDto memberDto) {
-        memberService.join_s(memberDto);
         return "redirect:/";
     }
 

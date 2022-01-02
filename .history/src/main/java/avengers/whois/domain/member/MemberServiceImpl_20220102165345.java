@@ -26,7 +26,6 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void join_s(MemberDto memberDto) {
         Member member = Member.createMember(memberDto);
-        memberRepository.save(member);
     }
 
 }

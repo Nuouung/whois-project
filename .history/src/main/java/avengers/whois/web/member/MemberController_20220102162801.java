@@ -28,15 +28,4 @@ public class MemberController {
         return "redirect:/";
     }
 
-    @GetMapping("/join_s")
-    public String memberJoinForm_s() {
-        return "member/join_s";
-    }
-
-    @PostMapping("/join_s")
-    public String memberJoinForm_s(MemberDto memberDto) {
-        memberService.join_s(memberDto);
-        return "redirect:/";
-    }
-
 }
