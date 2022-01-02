@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="/styles/join_s.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      var userinput;
+      var emptyCheck = /\s/;
+      var pwRule = /^(?=.*[a-zA-Z0-9])(?=.*\W).{10,20}$/;
+      var pnRule = /^(?=.*[0-9]).{11}$/;
+      var emRule = /^[a-z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/;
+      $(function () {
+        $("#pw").focusout(pwCheckRule);
+        $("#pn").focusout(pnCheckRule);
+        $("#em").focusout(emCheckRule);
+        $("#uname").focusout(naCheckRule);
+      });
+
+      function checkEmailAvailability() {
+        userinput = $("#em").val();
+        $.ajax({
+          url: "/member/join_echeck",
+          type: "post",
+
+          data: {
+            tempEmail: userinput,
+          },
+
+          success: function (result) {
+            $("#em").css("color", result);
+            $("#em").css("border-color", result);
+          },
+        });
+      }
+
+      function pwCheckRule() {
+        userinput = $("#pw").val();
+        if (pwRule.test(userinput) && !emptyCheck.test(userinput)) {
+          $("#pw").css("border", "2px solid green");
+          $("#pw").css("color", "green");
+          return true;
+        } else {
+          $("#pw").css("border", "2px solid red");
+          $("#pw").css("color", "red");
+          return false;
+        }
+      }
+
+      function pnCheckRule() {
+        userinput = $("#pn").val();
+        if (pnRule.test(userinput) && !emptyCheck.test(userinput)) {
+          $("#pn").css("border", "2px solid green");
+          $("#pn").css("color", "green");
+          return true;
+        } else {
+          $("#pn").css("border", "2px solid red");
+          $("#pn").css("color", "red");
+          return false;
+        }
+      }
+
+      function emCheckRule() {
+        userinput = $("#em").val();
+        if (emRule.test(userinput) && !emptyCheck.test(userinput)) {
+          $("#em").css("border", "2px solid green");
+          $("#em").css("color", "green");
+          return true;
+        } else {
+          $("#em").css("border", "2px solid red");
+          $("#em").css("color", "red");
+          return false;
+        }
+      }
+
+      function naCheckRule() {
+        userinput = $("#uname").val();
+        if (emptyCheck.test(userinput) || userinput == "") {
+          $("#uname").css("border", "2px solid red");
+          $("#uname").css("color", "red");
+          return false;
+        } else {
+          $("#uname").css("border", "2px solid green");
+          $("#uname").css("color", "green");
+          return true;
+        }
+      }
+
+      function finalCheck() {
+        if (!emCheckRule()) return false;
+        if (!pwCheckRule()) return false;
+        userinput = $("#uname").val();
+
+        if (!pnCheckRule()) return false;
+        userinput = $("#bd").val();
+        if (emptyCheck.test(userinput) || userinput == "") return false;
+        if (!$("#maleSelector").val() && !$("#femaleSelector").val())
+          return false;
+        document.jform.submit();
+      }
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join Member</title>
+  </head>
+  <body>
+    <section class="theme">
+      <a href="/">
+        <img
+          src="/imgs/logo/whois_logo_sub_blue.png"
+          alt="Project Logo Sub Blue"
+        />
+      </a>
+    </section>
+    <section class="formArea">
+      <p class="pageName">SIGN UP</p>
+      <form name="jform" action="/member/join_s" method="post">
+        <input
+          type="text"
+          name="email"
+          id="em"
+          placeholder="아이디 (이메일)"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          id="pw"
+          placeholder="비밀번호 (10~20자, 특수문자 최소 1개 포함)"
+          required
+        />
+        <input type="text" name="name" id="uname" placeholder="이름" required />
+        <input
+          type="text"
+          name="phoneNumber"
+          id="pn"
+          placeholder="휴대폰 번호 (-없이 입력)"
+          required
+        />
+        <input type="date" id="bd" name="birthday" max="2003-12-31" required />
+        <div class="genderSelect">
+          <input
+            type="radio"
+            value="M"
+            name="gender"
+            id="maleSelector"
+            required
+          />
+          <label for="maleSelector"> 남성 </label>
+          <input type="radio" value="F" name="gender" id="femaleSelector" />
+          <label for="femaleSelector"> 여성 </label>
+        </div>
+        <button type="button" onclick="finalCheck();">회원가입</button>
+      </form>
+    </section>
+  </body>
+</html>
