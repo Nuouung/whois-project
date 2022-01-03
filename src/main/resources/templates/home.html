@@ -1,117 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>whois</title>
-    <link rel="stylesheet" href="../static/css/common.css">
-    <style>
-        body {
-            margin: 0 auto;
-            max-width: 1280px;
-        }
-
-        .container {
-            display: flex;
-            height: 100vh;
-            width: inherit;
-        }
-
-        .sectionA, .sectionB {
-            width: 50%;
-            height: 100%;
-            flex-grow: 1;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        } 
-
-        .sectionA {
-            flex-direction: column;
-        }
-
-        .sectionB {
-            background-color: #003cf0;
-        }
-
-        .logo_image {
-            width: 25vw;
-        }
-
-        .inner_container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            width: 300px;
-        }
-
-        .inner_container > * {
-            margin: 7px;
-        }
-
-        .inner_container > div {
-            display: flex;
-            align-items: center;
-            justify-content: space-evenly;
-        }
-
-        .inner_container > div div {
-            display: flex;
-            align-items: center;
-        }
-
-        .inner_container > div > div input[type="radio"] {
-            color: #003cf0;
-            width: 20px;
-            height: 20px;
-        }
-
-        .inner_container > div > div label {
-            margin-left: 7px;
-        }
-
-        .inner_container > input {
-            border: 1px solid #003cf0;
-            border-radius: 10px;
-            height: 50px;
-            padding: 8px;
-            font-size: 16px;
-            color: #a9a9a9;
-        }
-
-        .inner_container > .submit_button {
-            border: 1px solid #003cf0;
-            background-color: #003cf0;
-            border-radius: 10px;
-            height: 50px;
-            padding: 8px;
-            font-size: 18px;
-            color: white;
-        }
-
-        .inner_container > div > a {
-            font-size: 16px;
-            text-decoration: none;
-            color: black;
-        }
-    </style>
+    <link rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}">
+    <link rel="stylesheet" href="../static/css/common.css" th:href="@{/css/home.css}">
 </head>
 <body>
     <section class="container">
         <article class="sectionA">
+            <div class="field_err" th:if="${#fields.hasGlobalErrors()}" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
             <h2>LOGIN</h2>
+            <form action="home.html" th:action th:object="${member}" method="post">
+                <article class="inner_container">
+                        <div>
+                            <div>
+                                <input type="radio" name="memberType" id="individual"><label for="individual">개인 로그인</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="memberType" id="company"><label for="company">기업 로그인</label>
+                            </div>
+                        </div>
+                        <input type="text" name="email" value="아이디를 입력하세요.">
+                        <input type="password" name="password" value="비밀번호를 입력하세요.">
+                        <button type="submit" class="submit_button">로그인</button>
+                </article>
+            </form>
             <article class="inner_container">
-                <div>
-                    <div>
-                        <input type="radio" name="memberType" id="individual"><label for="individual">개인 로그인</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="memberType" id="company"><label for="company">기업 로그인</label>
-                    </div>
-                </div>
-                <input value="아이디를 입력하세요.">
-                <input value="비밀번호를 입력하세요.">
-                <button class="submit_button">로그인</button>
                 <div>
                     <a href="#">개인 회원가입</a>
                     <div> | </div>
@@ -120,7 +35,7 @@
             </article>
         </article>
         <article class="sectionB">
-            <img src="../static/imgs/logo/whois_logo_sub_white.png" class="logo_image">
+            <img src="../static/imgs/logo/whois_logo_sub_white.png" th:src="@{/imgs/logo/whois_logo_sub_white.png}" class="logo_image">
         </article>
     </section>
 </body>
