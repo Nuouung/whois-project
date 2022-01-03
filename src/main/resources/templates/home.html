@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <title>whois</title>
     <link rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}">
-    <link rel="stylesheet" href="../static/css/common.css" th:href="@{/css/home.css}">
+    <link rel="stylesheet" href="../static/css/home.css" th:href="@{/css/home.css}">
+    <script defer src="../static/js/home.js" th:src="@{js/home.js}"></script>
 </head>
 <body>
     <section class="container">
         <article class="sectionA">
             <div class="field_err" th:if="${#fields.hasGlobalErrors()}" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
             <h2>LOGIN</h2>
-            <form action="home.html" th:action th:object="${member}" method="post">
+            <form id="loginForm" action="home.html" th:action th:object="${member}" method="post">
                 <article class="inner_container">
                         <div>
                             <div>
@@ -21,9 +22,9 @@
                                 <input type="radio" name="memberType" id="company"><label for="company">기업 로그인</label>
                             </div>
                         </div>
-                        <input type="text" name="email" value="아이디를 입력하세요.">
-                        <input type="password" name="password" value="비밀번호를 입력하세요.">
-                        <button type="submit" class="submit_button">로그인</button>
+                        <input type="text" name="email" id="email" th:field="*{email}" placeholder="이메일을 입력하세요.">
+                        <input type="password" name="password" id="password" th:field="*{password}" placeholder="비밀번호를 입력하세요.">
+                        <button id="formButton" type="submit" class="submit_button">로그인</button>
                 </article>
             </form>
             <article class="inner_container">
