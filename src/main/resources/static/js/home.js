@@ -1,3 +1,4 @@
+const emptyValidate = /\s/;
 const emailValidate =
   /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
 const passwordValidate = /^(?=.*[a-zA-Z0-9])(?=.*\W).{10,20}$/;
@@ -25,7 +26,10 @@ function radioCheck() {
 
 function emailCheck() {
   console.log("이메일검증");
-  if (!emailValidate.test(emailForm.value) || emailForm.value == "") {
+  if (
+    !emailValidate.test(emailForm.value) ||
+    emptyValidate.test(emailForm.value)
+  ) {
     emailForm.style.borderColor = "red";
     return false;
   }
@@ -35,7 +39,10 @@ function emailCheck() {
 
 function passwordCheck() {
   console.log("비밀번호검증");
-  if (!passwordValidate.test(passwordForm.value) || passwordForm.value == "") {
+  if (
+    !passwordValidate.test(passwordForm.value) ||
+    emptyValidate.test(passwordForm.value)
+  ) {
     passwordForm.style.borderColor = "red";
     return false;
   }
