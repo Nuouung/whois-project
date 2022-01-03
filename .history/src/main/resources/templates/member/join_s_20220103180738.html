@@ -32,7 +32,7 @@
           success: function (result) {
             $("#em").css("color", result);
             $("#em").css("border-color", result);
-            if (result == "green") document.jform.submit();
+            return result;
           },
         });
       }
@@ -122,7 +122,8 @@
         if (!pnCheckRule()) return false;
         if (!bdCheckRule()) return false;
         if (!gdCheck()) return false;
-        checkEmailAvailability();
+        if (checkEmailAvailability() == "red") return false;
+        document.jform.submit();
       }
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

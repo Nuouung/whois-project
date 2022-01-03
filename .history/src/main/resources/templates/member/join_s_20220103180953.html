@@ -122,7 +122,7 @@
         if (!pnCheckRule()) return false;
         if (!bdCheckRule()) return false;
         if (!gdCheck()) return false;
-        checkEmailAvailability();
+        if (checkEmailAvailability() == "red") return false;
       }
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
