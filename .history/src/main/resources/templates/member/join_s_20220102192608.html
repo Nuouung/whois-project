@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="/styles/join_s.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      var userinput;
+      var pwRule = /^(?=.*[a-zA-Z0-9])(?=.*\W).{10,20}$/;
+      var pnRule = /^(?=.*[0-9]).{11}$/;
+      var emRule = /^[a-z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/;
+      $(function () {
+        $("#pw").focusout(pwCheckRule);
+        $("#pn").focusout(pnCheckRule);
+        $("#em").focusout(emCheckRule);
+      });
+
+      function checkEmailAvailability() {
+        userinput = $("#em").val();
+        $.ajax({
+          url: "/member/join_echeck",
+          type: "post",
+
+          data: {
+            tempEmail: userinput,
+          },
+
+          success: function (result) {
+            $("#em").css("color", result);
+            $("#em").css("border-color", result);
+          },
+        });
+      }
+
+      function pwCheckRule() {
+        userinput = $("#pw").val();
+        if (!pwRule.test(userinput)) {
+          $("#pw").css("border-color", "red");
+          $("#pw").css("color", "red");
+        } else {
+          $("#pw").css("border-color", "green");
+          $("#pw").css("color", "green");
+        }
+      }
+
+      function pnCheckRule() {
+        userinput = $("#pn").val();
+        if (!pnRule.test(userinput)) {
+          $("#pn").css("border-color", "red");
+          $("#pn").css("color", "red");
+        } else {
+          $("#pn").css("border-color", "green");
+          $("#pn").css("color", "green");
+        }
+      }
+
+      function emCheckRule() {
+        userinput = $("#em").val();
+        if (!emRule.test(userinput)) {
+          $("#em").css("border-color", "red");
+          $("#em").css("color", "red");
+        } else {
+          $("#em").css("border-color", "green");
+          $("#em").css("color", "green");
+        }
+      }
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join Member</title>
+  </head>
+  <body>
+    <section class="theme">
+      <a href="/">
+        <img
+          src="/imgs/logo/whois_logo_sub_blue.png"
+          alt="Project Logo Sub Blue"
+        />
+      </a>
+    </section>
+    <section class="formArea">
+      <p class="pageName">SIGN UP</p>
+      <form action="/member/join_s" method="post">
+        <input
+          type="text"
+          name="email"
+          id="em"
+          placeholder="아이디 (이메일)"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          id="pw"
+          placeholder="비밀번호 (10~20자, 특수문자 최소 1개 포함)"
+        />
+        <input type="text" name="name" placeholder="이름" />
+        <input
+          type="text"
+          name="phoneNumber"
+          id="pn"
+          placeholder="휴대폰 번호 (-없이 입력)"
+        />
+        <input type="date" name="birthday" />
+        <div class="genderSelect">
+          <input type="radio" value="M" name="gender" id="maleSelector" />
+          <label for="maleSelector"> 남성 </label>
+          <input type="radio" value="F" name="gender" id="femaleSelector" />
+          <label for="femaleSelector"> 여성 </label>
+        </div>
+        <button type="submit">회원가입</button>
+      </form>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1280px;
+  --main-colour: #003cf0;
+  --sub-colour: #ff286e;
+  --font-colour: #3e3e3e;
+}
+
+.theme {
+  width: 50%;
+}
+
+.formArea {
+  width: 50%;
+}
+
+.theme > img {
+  width: 25%;
+}

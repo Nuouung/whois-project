@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="/styles/join_s.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join Member</title>
+  </head>
+  <body>
+    <section class="theme">
+      <a href="/">
+        <img
+          src="/imgs/logo/whois_logo_sub_blue.png"
+          alt="Project Logo Sub Blue"
+        />
+      </a>
+    </section>
+    <section class="formArea">
+      <p class="pageName">SIGN UP</p>
+      <form name="jform" action="/member/c_signup" method="post">
+        <input
+          type="text"
+          name="email"
+          id="em"
+          placeholder="아이디 (이메일)"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          id="pw"
+          placeholder="비밀번호 (10~20자, 특수문자 최소 1개 포함)"
+          required
+        />
+        <input
+          type="text"
+          name="name"
+          id="uname"
+          placeholder="담당자 이름"
+          required
+        />
+        <input
+          type="text"
+          name="phoneNumber"
+          id="pn"
+          placeholder="담당자 휴대폰 번호 (-없이 입력)"
+          required
+        />
+        <input
+          type="text"
+          name="corpNo"
+          id="cno"
+          placeholder="사업자 등록 번호"
+          required
+        />
+        <input
+          type="text"
+          name="corpName"
+          id="cname"
+          placeholder="사업자명"
+          required
+        />
+        <select name="industryField">
+          <option value="distribution">유통</option>
+          <option value="construction">건설</option>
+          <option value="event">행사</option>
+          <option value="ecommerce">전자상거래</option>
+        </select>
+        <input
+          type="text"
+          name="corpAddress"
+          id="addr"
+          placeholder="사업자 등록주소"
+          required
+        />
+        <input
+          type="date"
+          id="bd"
+          name="establishedDate"
+          max="2020-12-31"
+          required
+        />
+
+        <button type="button" onclick="finalCheck();">회원가입</button>
+      </form>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="/styles/join_s.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      var em;
+      $(function(){
+        em = "$("#inEmail").val();
+      });
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join Member</title>
+  </head>
+  <body>
+    <section class="theme">
+      <img
+        src="/imgs/logo/whois_logo_sub_blue.png"
+        alt="Project Logo Sub Blue"
+      />
+    </section>
+    <section class="formArea">
+      <p class="pageName">SIGN UP</p>
+      <form action="/member/join_s" method="post">
+        <input
+          type="text"
+          name="email"
+          id="inEmail"
+          placeholder="아이디 (이메일)"
+        />
+        <input type="password" name="password" placeholder="비밀번호" />
+        <input type="text" name="name" placeholder="이름" />
+        <input
+          type="number"
+          name="phoneNumber"
+          placeholder="휴대폰 번호 (-없이 입력)"
+        />
+        <input type="date" name="birthday" />
+        <div class="genderSelect">
+          <input type="radio" value="M" name="gender" id="maleSelector" />
+          <label for="maleSelector"> 남성 </label>
+          <input type="radio" value="F" name="gender" id="femaleSelector" />
+          <label for="femaleSelector"> 여성 </label>
+        </div>
+        <button type="submit">회원가입</button>
+      </form>
+    </section>
+  </body>
+</html>
