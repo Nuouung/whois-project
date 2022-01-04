@@ -1,6 +1,5 @@
 package avengers.whois.domain.member;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -9,25 +8,28 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-import avengers.whois.web.member.MemberDto;
-import lombok.AccessLevel;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 @Entity
-@EntityListeners(AuditingEntityListener.class)
 @Getter
-@Setter(AccessLevel.PRIVATE)
-public class Member {
-
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Table(name = "corporation")
+@EntityListeners(AuditingEntityListener.class)
+public class CorporateMember {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "MEMBER_ID")
+    @Column(name = "CORP_ID")
     private long id;
 
     @Column(nullable = false)
@@ -36,31 +38,27 @@ public class Member {
     private String password;
 
     @Column(nullable = false)
-    private String name;
+    private String repName; // 담당자명
     @Column(nullable = false)
-    private String phoneNumber;
+    private String repPhoneNumber; // 담당자번호
+
     @Column(nullable = false)
-    private LocalDate birthday;
+    private String corpNo; // 사업자번호
     @Column(nullable = false)
-    private char gender;
+    private String corpName; // 사업자명
+    @Column(nullable = false)
+    private String industryField; // 업종
+    @Column(nullable = false)
+    private String corpAddress; // 사업자주소
+    @Column(nullable = false)
+    private LocalDateTime establishedDate;// 설립일
+
+    // img
+    @Column(nullable = true)
+    private String fname; // 업로드된 파일이름 (새이름)
 
     @CreatedDate
     private LocalDateTime createdDate;
     @LastModifiedDate
     private LocalDateTime modifiedDate;
-
-    protected Member() {
-    }
-
-    // == 생성 메소드 == //
-    public static Member createMember(MemberDto memberDto) {
-        Member member = new Member();
-        member.setEmail(memberDto.getEmail());
-        member.setPassword(memberDto.getPassword());
-        member.setName(memberDto.getName());
-        member.setPhoneNumber(memberDto.getPhoneNumber());
-        member.setBirthday(memberDto.getBirthday());
-        member.setGender(memberDto.getGender());
-        return member;
-    }
 }
