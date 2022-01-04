@@ -1,0 +1,91 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-align: center;
+  --main-colour: #003cf0;
+  --sub-colour: #ff286e;
+  --font-colour: #3e3e3e;
+  --input-placeholder-font-colour: #a9a9a9;
+  --font-family: ;
+}
+
+input {
+  border-radius: 10px;
+  border-color: #3362f0;
+  text-align: start;
+  height: 3rem;
+  padding: 0.5rem 1rem;
+  margin: 0.25rem 0;
+  align-items: center;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1280px;
+  max-height: 1024px;
+  height: 100vh;
+}
+
+.pageName {
+  font-weight: bolder;
+  font-size: xx-large;
+}
+
+.theme {
+  width: 50%;
+}
+
+.theme img {
+  width: 25%;
+}
+
+.formArea {
+  background-color: #3362f0;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.formArea > form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5% 15%;
+}
+
+.genderSelect {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 2.5rem;
+  text-align: center;
+}
+
+.genderSelect > input,
+.genderSelect > label {
+  width: 10%;
+  height: 1.5rem;
+  color: whitesmoke;
+}
+
+form > button {
+  margin-top: 0.5rem;
+  height: 3.5rem;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #152b6e;
+  color: whitesmoke;
+  font-size: larger;
+}
+
+#error {
+  color: red;
+  font-weight: boler;
+  justify-self: flex-end;
+  
+}

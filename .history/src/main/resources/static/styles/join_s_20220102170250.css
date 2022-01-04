@@ -1,0 +1,40 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1280px;
+  --main-colour: #003cf0;
+  --sub-colour: #ff286e;
+  --font-colour: #3e3e3e;
+  --input-placeholder-font-colour: #a9a9a9;
+  max-height: 1024px;
+  height: 100vh;
+}
+
+.theme {
+  width: 50%;
+}
+
+.formArea {
+  background-color: #3362f0;
+  width: 50%;
+  height: 100%;
+}
+
+.theme > img {
+  width: 25%;
+}
+
+.formArea > form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5% 0;
+}
