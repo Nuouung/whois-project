@@ -35,16 +35,10 @@
           <article class="inner_container">
             <div>
               <div>
-                <input type="radio" name="memberType" id="individual" /><label
-                  for="individual"
-                  >개인 로그인</label
-                >
+                <input type="radio" id="individual" th:field="*{memberType}" th:value="individual"><label for="individual" >개인 로그인</label>
               </div>
               <div>
-                <input type="radio" name="memberType" id="company" /><label
-                  for="company"
-                  >기업 로그인</label
-                >
+                <input type="radio" id="company" th:field="*{memberType}" th:value="company"/><label for="company">기업 로그인</label>
               </div>
             </div>
             <input

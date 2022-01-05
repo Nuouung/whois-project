@@ -1,6 +1,6 @@
 package avengers.whois.web;
 
-import avengers.whois.web.member.MemberDto;
+import avengers.whois.web.member.LoginDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +12,7 @@ public class HomeController {
 
     @GetMapping
     public String toHome(Model model) {
-        model.addAttribute("member", new MemberDto());
+        model.addAttribute("member", new LoginDto());
         return "home";
     }
 }

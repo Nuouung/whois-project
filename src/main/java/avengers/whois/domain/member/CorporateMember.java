@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Table(name = "corporation")
 @EntityListeners(AuditingEntityListener.class)
-public class CorporateMember {
+public class CorporateMember implements Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CORP_ID")

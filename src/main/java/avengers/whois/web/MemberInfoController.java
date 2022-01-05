@@ -10,7 +10,7 @@ public class MemberInfoController {
 	
 	@GetMapping
 	public String memberInfo() {
-		return "/memberInfo";
+		return "/member/memberInfo";
 	}
 	
 

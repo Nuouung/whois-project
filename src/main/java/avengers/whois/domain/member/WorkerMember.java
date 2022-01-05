@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "worker")
-public class WorkerMember {
+public class WorkerMember implements Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
