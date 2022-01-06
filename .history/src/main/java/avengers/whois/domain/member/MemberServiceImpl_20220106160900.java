@@ -17,8 +17,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public String checkEmail(String tempEmail) {
-        if (workerMemberRepository.findByEmail(tempEmail).isPresent()
-                || corporateMemberRepository.findByEmail(tempEmail).isPresent()) {
+        if (workerMemberRepository.findByEmail(tempEmail).isPresent()) {
             return "red";
         } else {
             return "green";
