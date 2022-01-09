@@ -1,5 +1,6 @@
 package avengers.whois.web.member;
 
+import avengers.whois.domain.file.FileManager;
 import avengers.whois.domain.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -7,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/member")
@@ -31,7 +34,8 @@ public class MemberController {
     }
 
     @PostMapping("/w_signup")
-    public String wJoinSubmit(WorkerMemberDto workerMemberDto, AdditionalInfoDto additionalInfoDto) {
+    public String wJoinSubmit(WorkerMemberDto workerMemberDto, AdditionalInfoDto additionalInfoDto) throws IOException {
+
         memberService.joinW(workerMemberDto, additionalInfoDto);
         return "redirect:/";
     }

@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @AllArgsConstructor
@@ -30,9 +31,9 @@ public class WorkerMemberDto {
     private String address;
 
     // img
-    private String fname; // 업로드된 파일이름 (새이름)
+    private MultipartFile fname; // 업로드된 파일이름 (새이름)
     // resume
-    private String resume;// 이력서 파일이름 (새이름)
+    private MultipartFile resume;// 이력서 파일이름 (새이름)
 
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;

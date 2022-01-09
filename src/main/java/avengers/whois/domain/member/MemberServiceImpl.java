@@ -1,11 +1,14 @@
 package avengers.whois.domain.member;
 
+import avengers.whois.domain.file.FileManager;
 import org.springframework.stereotype.Service;
 
 import avengers.whois.web.member.AdditionalInfoDto;
 import avengers.whois.web.member.CorporateMemberDto;
 import avengers.whois.web.member.WorkerMemberDto;
 import lombok.RequiredArgsConstructor;
+
+import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
@@ -14,6 +17,7 @@ public class MemberServiceImpl implements MemberService {
     private final WorkerMemberRepository workerMemberRepository;
     private final CorporateMemberRepository corporateMemberRepository;
     private final AdditionalInfoRepository additionalInfoRepository;
+    private final FileManager fileManager;
 
     @Override
     public String checkEmail(String tempEmail) {
@@ -26,17 +30,33 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void joinW(WorkerMemberDto workerMemberDto, AdditionalInfoDto additionalInfoDto) {
+    public void joinW(WorkerMemberDto workerMemberDto, AdditionalInfoDto additionalInfoDto) throws IOException {
         WorkerMember data = WorkerMember.builder().email(workerMemberDto.getEmail())
                 .password(workerMemberDto.getPassword()).name(workerMemberDto.getName())
                 .phoneNumber(workerMemberDto.getPhoneNumber()).birthday(workerMemberDto.getBirthday())
                 .gender(workerMemberDto.getGender()).finding(workerMemberDto.isFinding())
                 .address(workerMemberDto.getAddress()).build();
+
+        // 이력서, 포트폴리오 db에 반영 로직
+        storeFiles(workerMemberDto, data);
+
         AdditionalInfo inData = AdditionalInfo.builder().prefJob(additionalInfoDto.getPrefJob())
                 .prefMajor(additionalInfoDto.getPrefMajor())
                 .prefExp(additionalInfoDto.getPrefExp()).expMonths(additionalInfoDto.getExpMonths())
                 .workerMember(workerMemberRepository.save(data)).build();
         additionalInfoRepository.save(inData);
+    }
+
+    private void storeFiles(WorkerMemberDto workerMemberDto, WorkerMember data) throws IOException {
+        if (!workerMemberDto.getFname().isEmpty()) {
+            String convertedFName = fileManager.convertAndStore(workerMemberDto.getFname());
+            data.setFName(convertedFName);
+        }
+
+        if (!workerMemberDto.getResume().isEmpty()) {
+            String convertedResume = fileManager.convertAndStore(workerMemberDto.getResume());
+            data.setResume(convertedResume);
+        }
     }
 
     @Override
