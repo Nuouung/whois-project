@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="/css/styles/join_s.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      var userinput;
+      var emptyCheck = /\s/;
+      var pwRule = /^(?=.*[a-zA-Z0-9])(?=.*\W).{10,20}$/;
+      var pnRule = /^(?=.*[0-9]).{11}$/;
+      var emRule = /^[a-z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/;
+
+      $(function () {
+        $("#pw").focusout(pwCheckRule);
+        $("#pn").focusout(pnCheckRule);
+        $("#em").focusout(emCheckRule);
+        $("#uname").focusout(naCheckRule);
+        $("#bd").focusout(bdCheckRule);
+        $("#prefExp").change(toggleYM);
+        $("#years").change(calcExpM);
+        $("#months").change(calcExpM);
+      });
+
+      function checkEmailAvailability() {
+        userinput = $("#em").val();
+        $.ajax({
+          url: "/member/emailCheck_W",
+          type: "post",
+
+          data: {
+            tempEmail: userinput,
+          },
+
+          success: function (result) {
+            $("#em").css("color", result);
+            $("#em").css("border-color", result);
+            if (result == "green") document.jform.submit();
+          },
+        });
+      }
+
+      function pwCheckRule() {
+        userinput = $("#pw").val();
+        if (pwRule.test(userinput) && !emptyCheck.test(userinput)) {
+          $("#pw").css("border", "2px solid green");
+          $("#pw").css("color", "green");
+          return true;
+        } else {
+          $("#pw").css("border", "2px solid red");
+          $("#pw").css("color", "red");
+          $("#errors").text(
+            "비밀번호가 없거나, 형식에 맞지 않습니다." +
+              <br /> +
+              "*10~20자, 특수문자 최소 1개 포함"
+          );
+          return false;
+        }
+      }
+
+      function pnCheckRule() {
+        userinput = $("#pn").val();
+        if (pnRule.test(userinput) && !emptyCheck.test(userinput)) {
+          $("#pn").css("border", "2px solid green");
+          $("#pn").css("color", "green");
+          return true;
+        } else {
+          $("#pn").css("border", "2px solid red");
+          $("#pn").css("color", "red");
+          $("#errors").text(
+            "비밀번호가 없거나, 형식에 맞지 않습니다.\n*10~20자, 특수문자 최소 1개 포함"
+          );
+          return false;
+        }
+      }
+
+      function emCheckRule() {
+        userinput = $("#em").val();
+        if (emRule.test(userinput) && !emptyCheck.test(userinput)) {
+          $("#em").css("border", "2px solid green");
+          $("#em").css("color", "green");
+          return true;
+        } else {
+          $("#em").css("border", "2px solid red");
+          $("#em").css("color", "red");
+          return false;
+        }
+      }
+
+      function naCheckRule() {
+        userinput = $("#uname").val();
+        if (emptyCheck.test(userinput) || userinput == "") {
+          $("#uname").css("border", "2px solid red");
+          $("#uname").css("color", "red");
+          return false;
+        } else {
+          $("#uname").css("border", "2px solid green");
+          $("#uname").css("color", "green");
+          return true;
+        }
+      }
+
+      function bdCheckRule() {
+        userinput = $("#bd").val();
+        if (emptyCheck.test(userinput) || userinput == "") {
+          $("#bd").css("border", "2px solid red");
+          $("#bd").css("color", "red");
+          return false;
+        } else {
+          $("#bd").css("border", "2px solid green");
+          $("#bd").css("color", "green");
+          return true;
+        }
+      }
+
+      function gdCheck() {
+        if (
+          !document.getElementById("maleSelector").checked &&
+          !document.getElementById("femaleSelector").checked
+        ) {
+          $("#emptyGender").text("필수선택");
+          return false;
+        } else {
+          $("#emptyGender").text("");
+          return true;
+        }
+      }
+
+      function toggleYM() {
+        userinput = $("#prefExp option:selected").val();
+        if (userinput == "experienced") $("#expY").show();
+        else $("#expY").hide();
+      }
+
+      function calcExpM() {
+        $("#expMonths").val(0);
+        var sum = 0;
+        if ($("#years").val() != 0) {
+          sum += parseInt($("#years").val()) * 12;
+        }
+        if ($("#months").val() != 0) {
+          sum += parseInt($("#months").val());
+        }
+
+        $("#expMonths").val(sum);
+      }
+
+      function finalCheck() {
+        if (!emCheckRule()) return false;
+        if (!pwCheckRule()) return false;
+        if (!naCheckRule()) return false;
+        if (!pnCheckRule()) return false;
+        if (!bdCheckRule()) return false;
+        if (!gdCheck()) return false;
+        checkEmailAvailability();
+      }
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join : Seeking Member</title>
+  </head>
+  <body>
+    <section class="theme" style="position: sticky; top: 0; left: 0">
+      <a href="/">
+        <img
+          src="/imgs/logo/whois_logo_sub_blue.png"
+          alt="Project Logo Sub Blue"
+        />
+      </a>
+    </section>
+    <section class="formArea">
+      <p class="pageName">SIGN UP</p>
+      <form name="jform" action="/member/w_signup" method="post">
+        <input
+          type="text"
+          name="email"
+          id="em"
+          placeholder="아이디 (이메일)"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          id="pw"
+          placeholder="비밀번호 (10~20자, 특수문자 최소 1개 포함)"
+          required
+        />
+        <input type="text" name="name" id="uname" placeholder="이름" required />
+        <input
+          type="text"
+          name="phoneNumber"
+          id="pn"
+          placeholder="휴대폰 번호 (-없이 입력)"
+          required
+        />
+        <input type="date" id="bd" name="birthday" max="2003-12-31" required />
+        <input
+          type="text"
+          name="address"
+          id="addr"
+          placeholder="주소"
+          required
+        />
+        <div class="genderSelect">
+          <input
+            type="radio"
+            value="M"
+            name="gender"
+            id="maleSelector"
+            required
+          />
+          <label class="selector" for="maleSelector">남성</label>
+          <input type="radio" value="F" name="gender" id="femaleSelector" />
+          <label class="selector" for="femaleSelector">여성</label>
+          <span id="emptyGender"></span>
+        </div>
+        <div class="findingSelect">
+          <input type="radio" value="true" name="finding" id="true" required />
+          <label class="selector" for="true">구직/이직준비 중</label>
+          <input type="radio" value="false" name="finding" id="notTrue" />
+          <label class="selector" for="notTrue">구직/이직 의사 없음</label>
+          <span id="emptyFinding"></span>
+        </div>
+        <hr />
+        <span style="font-size: larger; padding-top: 0.25rem"
+          >(선택) 추가 정보</span
+        >
+        <span style="font-size: small; padding-bottom: 0.5rem"
+          >* 추가정보는 회원가입 이후에도 입력 가능합니다</span
+        >
+        <select name="prefJob">
+          <option value="" selected>----희망 직무 선택----</option>
+          <option value="translator">통역</option>
+          <option value="planner">기획</option>
+          <option value="marketer">마케팅</option>
+          <option value="accountant">회계</option>
+        </select>
+        <select name="prefMajor">
+          <option value="" selected>----최종학력 전공 선택----</option>
+          <option value="engineering">공학</option>
+          <option value="art">예술</option>
+          <option value="humanities">인문학</option>
+          <option value="economics">경제학</option>
+        </select>
+        <div class="exp" style="display: flex">
+          <select id="prefExp" name="prefExp">
+            <option value="" selected>----경력여부----</option>
+            <option value="experienced">경력</option>
+            <option value="newbie">신입</option>
+          </select>
+          <div id="expY" class="expY" hidden>
+            <input
+              type="number"
+              id="expMonths"
+              value="0"
+              name="expMonths"
+              hidden
+            />
+            <input
+              id="years"
+              type="number"
+              placeholder="년"
+              style="padding-right: 0"
+              max="20"
+            />
+            <span class="year">년</span>
+            <input
+              id="months"
+              type="number"
+              placeholder="개월"
+              style="padding-right: 0; padding-left: 0.5rem"
+              max="11"
+            />
+            <span class="month">개월</span>
+          </div>
+        </div>
+        <span id="errors" style="color: red"></span>
+        <button type="button" onclick="finalCheck();">개인회원가입</button>
+      </form>
+    </section>
+  </body>
+</html>

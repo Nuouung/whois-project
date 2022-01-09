@@ -1,0 +1,6 @@
+2022-01-06T01:32:55.207753600 | tester1 : tester1 joined chat.
+2022-01-06T01:32:58.596760 | tester1 : abcdefg
+2022-01-06T01:33:01.878928500 | tester1 : tester1 out
+2022-01-06T01:33:09.472933 | tester2 : tester2 joined chat.
+2022-01-06T01:33:13.142715500 | tester2 : tester2 in
+2022-01-06T01:33:16.019813800 | tester2 : adadsfas
