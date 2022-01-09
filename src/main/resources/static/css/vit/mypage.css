@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-
 .material-icons.md-36 {
 	font-size: 36px;
 }
@@ -61,7 +60,7 @@
 /* /////////////////////////멤버페이지////////////////////// */
 body{background-color: #fafafa;}
 
-.member_page{width:320px; height:100vh; background-color:#ffffff; }
+.member_page{width:210px; height:100vh; background-color:#ffffff; }
 
 .logo{padding: 20px 0 0 20px;}
 
