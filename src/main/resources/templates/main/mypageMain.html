@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
-		<th:block th:insert="/vit/mypageHeader::head">
+
 	</head>
 	<body>
-		<header>
-			<th:block th:insert="/vit/mypageHeader::header">
+		<header th:replace="~{/main/mypageHeader :: header}">
 		</header>
 		<main>
 		dd<br>

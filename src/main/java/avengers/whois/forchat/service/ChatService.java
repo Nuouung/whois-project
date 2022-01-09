@@ -1,7 +1,9 @@
 package avengers.whois.forchat.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -32,7 +34,7 @@ public class ChatService {
         System.out.println("getRoomList execute : current serverNo " + serverNo);
         if (rr.findBychatbox_chatNo(serverNo).isPresent()) {
             System.out.println("1");
-            return rr.findBychatbox_chatNo(serverNo).stream().toList();
+            return rr.findBychatbox_chatNo(serverNo).stream().collect(Collectors.toList());
         }
         System.out.println("1");
         List<RoomE> dummy = new ArrayList<>();
