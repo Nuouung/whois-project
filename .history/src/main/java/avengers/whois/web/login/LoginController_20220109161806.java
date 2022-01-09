@@ -55,7 +55,7 @@ public class LoginController {
 
     @RequestMapping(value = "/tester", method = RequestMethod.GET)
     public String testtest() {
-        return "/member/loginSuccess";
+        return "/member/memberInfo";
     }
 
     @GetMapping("/logout")

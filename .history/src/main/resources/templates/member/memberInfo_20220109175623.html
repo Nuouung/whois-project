@@ -68,11 +68,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
     <main>
       <span>test</span>
+      <span>[[${session.principal}]]</span>
       <th:block >
         <div sec:authorize="isAuthenticated()">
-          <span sec:authentication="name"></span>
-          <span sec:authentication="phoneNumber"></span>
-          <span sec:authentication="address"></span>
+          <span sec:authentication="principal.name"></span>
+          <span sec:authentication="principal.phoneNumber"></span>
+          <span sec:authentication="principal.address"></span>
         </div>
 
         <div>

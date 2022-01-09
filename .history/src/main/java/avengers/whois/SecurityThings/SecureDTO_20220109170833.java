@@ -20,9 +20,7 @@ public class SecureDTO extends User {
     public SecureDTO(WorkerMember a) {
         super(a.getEmail(), a.getPassword(),
                 a.getRoles().stream().map(b -> new SimpleGrantedAuthority(b)).collect(Collectors.toList()));
-
         System.out.println("this.getUsername() : " + this.getUsername());
-        System.out.println("this.getPassword() : " + this.getPassword());
         this.id = a.getId();
         this.name = a.getName();
         this.phoneNumber = a.getPhoneNumber();
@@ -37,6 +35,9 @@ public class SecureDTO extends User {
     }
 
     private long id;
+
+    private String email;
+    private String password;
 
     private String name;
     private String phoneNumber;

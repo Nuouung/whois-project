@@ -162,7 +162,6 @@
         if (!bdCheckRule()) return false;
         if (!gdCheck()) return false;
         checkEmailAvailability();
-        document.getElementById("jform").submit();
       }
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -179,7 +178,7 @@
     </section>
     <section class="formArea">
       <p class="pageName">SIGN UP</p>
-      <form id="jform" th:action="@{/member/w_signup}" method="post">
+      <form name="jform" th:action="@{/member/w_signup}" method="post">
         <input
           type="text"
           name="email"

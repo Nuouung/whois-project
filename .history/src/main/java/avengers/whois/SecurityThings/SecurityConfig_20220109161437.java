@@ -19,16 +19,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/member/w_signup", "/member/test1", "/trylogin", "/member/c_signup",
-                        "/member/emailCheck")
+                .antMatchers("/", "/member/w_signup", "/member/test1", "/member/c_signup", "/member/emailCheck")
                 .permitAll()
-                .antMatchers("/tester").hasRole("WORKER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/")
+                .loginProcessingUrl("/trylogin")
                 .usernameParameter("email")
-                .defaultSuccessUrl("/tester");
+                .defaultSuccessUrl("/");
     }
 
     @Bean

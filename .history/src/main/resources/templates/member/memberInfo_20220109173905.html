@@ -69,12 +69,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <main>
       <span>test</span>
       <th:block >
-        <div sec:authorize="isAuthenticated()">
-          <span sec:authentication="name"></span>
-          <span sec:authentication="phoneNumber"></span>
-          <span sec:authentication="address"></span>
-        </div>
-
+        <span sec:authentication="principal.name"></span>
         <div>
           <span>Prefered Job : </span>
           <span id="pjob"></span>
@@ -91,5 +86,52 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
       </th:block>
     </main>
 
+    <script type="text/javascript">
+      $(function () {
+        basicInfo();
+        loadAdditional();
+
+        $(".edit").click(function () {
+          $(".memberInfo-edit").show();
+        });
+      });
+
+      function loadAdditional() {
+        $.ajax({
+          url: "/member/loadAdditional",
+          type: "post",
+          data: {
+            email: "[[${session.logInfo.email}]]",
+            password: "[[${session.logInfo.password}]]",
+          },
+
+          success: function (result) {
+            $("#pjob").text(result.prefJob);
+            $("#pmajor").text(result.prefMajor);
+            $("#prefExp").text(result.prefExp);
+            $("#expMonths").text(result.expMonths);
+            
+          },
+        });
+      }
+      function basicInfo() {
+        $.ajax({
+          url: "/member/loadBasic",
+          type: "post",
+          data: {
+            email: "[[${session.logInfo.email}]]",
+            password: "[[${session.logInfo.password}]]",
+          },
+
+          success: function (result) {
+            $("#username").val(result.name);
+            $("#userpw").val(result.password);
+            $("#userpn").val(result.phoneNumber);
+            $("#userbd").text(result.birthday);
+            $("#useraddr").val(result.address);
+          },
+        });
+      }
+    </script>
   </body>
 </html>

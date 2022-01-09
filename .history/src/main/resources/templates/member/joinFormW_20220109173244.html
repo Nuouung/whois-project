@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<html
-  lang="en"
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -162,7 +158,6 @@
         if (!bdCheckRule()) return false;
         if (!gdCheck()) return false;
         checkEmailAvailability();
-        document.getElementById("jform").submit();
       }
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -179,7 +174,7 @@
     </section>
     <section class="formArea">
       <p class="pageName">SIGN UP</p>
-      <form id="jform" th:action="@{/member/w_signup}" method="post">
+      <form name="jform" th:action="@{/member/w_signup}" method="post">
         <input
           type="text"
           name="email"

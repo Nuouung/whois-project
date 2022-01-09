@@ -38,7 +38,6 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 
     @Override
     public void joinW(WorkerMemberDto workerMemberDto, AdditionalInfoDto additionalInfoDto) {
-        System.out.println("MemberServiceImpl > workerMemberDto : " + workerMemberDto);
         List<String> aut = List.of("ROLE_WORKER");
         WorkerMember data = WorkerMember.builder().email(workerMemberDto.getEmail())
                 .password(pe.encode(workerMemberDto.getPassword())).name(workerMemberDto.getName())
@@ -97,7 +96,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
             WorkerMember d = workerMemberRepository.findByEmail(username).get();
             System.out.println(d);
             SecureDTO data = new SecureDTO(d);
-            System.out.println("MemberServiceImpl>else : SecureDTO " + data);
+            System.out.println("MemberServiceImpl>else : SecureDTO " + d);
             return data;
         }
     }

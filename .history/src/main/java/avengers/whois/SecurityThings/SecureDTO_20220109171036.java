@@ -38,6 +38,9 @@ public class SecureDTO extends User {
 
     private long id;
 
+    private String email;
+    private String password;
+
     private String name;
     private String phoneNumber;
     private LocalDate birthday;
