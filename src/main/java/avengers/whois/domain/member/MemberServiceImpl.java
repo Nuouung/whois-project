@@ -59,12 +59,12 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
     }
 
     private void storeFiles(WorkerMemberDto workerMemberDto, WorkerMember data) throws IOException {
-        if (!workerMemberDto.getFname().isEmpty()) {
+        if (workerMemberDto.getFname() != null) {
             String convertedFName = fileManager.convertAndStore(workerMemberDto.getFname());
             data.setFName(convertedFName);
         }
 
-        if (!workerMemberDto.getResume().isEmpty()) {
+        if (workerMemberDto.getResume() != null) {
             String convertedResume = fileManager.convertAndStore(workerMemberDto.getResume());
             data.setResume(convertedResume);
         }
