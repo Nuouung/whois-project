@@ -2,14 +2,10 @@ package avengers.whois.domain.member;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Set;
-import java.util.HashSet;
 
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,21 +19,18 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Entity
-@EntityListeners(AuditingEntityListener.class)
 @Getter
-@Builder
-@NoArgsConstructor
-@ToString
 @AllArgsConstructor
-@Table(name = "worker")
-public class WorkerMember implements Member {
-
+@NoArgsConstructor
+@Builder
+@Table(name = "corporation")
+@EntityListeners(AuditingEntityListener.class)
+public class CorporateMember implements Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "WORKER_ID")
+    @Column(name = "CORP_ID")
     private long id;
 
     @Column(nullable = false)
@@ -46,41 +39,31 @@ public class WorkerMember implements Member {
     private String password;
 
     @Column(nullable = false)
-    private String name;
+    private String repName; // 담당자명
     @Column(nullable = false)
-    private String phoneNumber;
-    @Column(nullable = false)
-    private LocalDate birthday;
-    @Column(nullable = false)
-    private char gender;
+    private String repPhoneNumber; // 담당자번호
 
     @Column(nullable = false)
-    private boolean finding; // 구직여부 T:구함
+    private String corpNo; // 사업자번호
     @Column(nullable = false)
-    private String address;
+    private String corpName; // 사업자명
+    @Column(nullable = false)
+    private String industryField; // 업종
+    @Column(nullable = false)
+    private String corpAddress; // 사업자주소
+    @Column(nullable = false)
+    private LocalDate establishedDate;// 설립일
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Builder.Default
+    private List<String> roles = new ArrayList<>();
 
     // img
     @Column(nullable = true)
     private String fname; // 업로드된 파일이름 (새이름)
 
-    // resume
-    @Column(nullable = true)
-    private String resume; // 이력서 파일이름 (새이름)
-
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Builder.Default
-    private Set<String> roles = new HashSet<>();
-
     @CreatedDate
     private LocalDateTime createdDate;
     @LastModifiedDate
     private LocalDateTime modifiedDate;
-
-    public void setFName(String fname) {
-        this.fname = fname;
-    }
-
-    public void setResume(String resume) {
-        this.resume = resume;
-    }
 }

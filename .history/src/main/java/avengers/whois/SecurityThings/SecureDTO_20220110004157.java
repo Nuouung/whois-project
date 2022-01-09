@@ -45,20 +45,20 @@ public class SecureDTO extends User {
         System.out.println("this.getPassword() : " + this.getPassword());
         this.id = a.getId();
         this.repName = a.getRepName();
-        this.repPhoneNumber = a.getRepPhoneNumber();
+        this.phoneNumber = a.getRepPhoneNumber();
+        this.birthday = a.getEstablishedDate();
         this.corpNo = a.getCorpNo();
         this.corpName = a.getCorpName();
-        this.industryField = a.getIndustryField();
-        this.corpAddress = a.getCorpAddress();
-        this.establishedDate = a.getEstablishedDate();
-
+        this.address = a.getAddress();
         this.fname = a.getFname();
-
+        this.resume = a.getResume();
         this.createdDate = a.getCreatedDate();
         this.modifiedDate = a.getModifiedDate();
     }
 
     // variables for Worker Member from here
+    private long id;
+
     private String name;
     private String phoneNumber;
     private LocalDate birthday;
@@ -76,9 +76,6 @@ public class SecureDTO extends User {
     private String industryField; // 업종
     private String corpAddress; // 사업자주소
     private LocalDate establishedDate;// 설립일
-
-    // common variables for both
-    private long id;
 
     // img
     private String fname; // 업로드된 파일이름 (새이름)

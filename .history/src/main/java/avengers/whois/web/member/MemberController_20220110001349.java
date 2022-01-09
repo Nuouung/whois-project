@@ -1,5 +1,6 @@
 package avengers.whois.web.member;
 
+import avengers.whois.domain.file.FileManager;
 import avengers.whois.domain.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -48,7 +49,6 @@ public class MemberController {
 
     @PostMapping("/c_signup")
     public String cJoinSubmit(CorporateMemberDto corporateMemberDto, AdditionalInfoDto additionalInfoDto) {
-        System.out.println("enterd Controller");
         memberService.joinC(corporateMemberDto, additionalInfoDto);
         System.out.println("contoller executed");
         return "redirect:/";

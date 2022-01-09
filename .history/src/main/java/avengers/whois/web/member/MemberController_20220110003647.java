@@ -1,5 +1,6 @@
 package avengers.whois.web.member;
 
+import avengers.whois.domain.file.FileManager;
 import avengers.whois.domain.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

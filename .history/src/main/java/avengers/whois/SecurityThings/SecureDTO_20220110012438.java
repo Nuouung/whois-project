@@ -59,6 +59,8 @@ public class SecureDTO extends User {
     }
 
     // variables for Worker Member from here
+    private long id;
+
     private String name;
     private String phoneNumber;
     private LocalDate birthday;
@@ -78,8 +80,6 @@ public class SecureDTO extends User {
     private LocalDate establishedDate;// 설립일
 
     // common variables for both
-    private long id;
-
     // img
     private String fname; // 업로드된 파일이름 (새이름)
 

@@ -1,7 +1,7 @@
 package avengers.whois.domain.member;
 
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -41,7 +41,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
     @Override
     public void joinW(WorkerMemberDto workerMemberDto, AdditionalInfoDto additionalInfoDto) throws IOException {
         System.out.println("MemberServiceImpl > workerMemberDto : " + workerMemberDto);
-        Set<String> aut = Set.of("ROLE_WORKER");
+        List<String> aut = List.of("ROLE_WORKER");
         WorkerMember data = WorkerMember.builder().email(workerMemberDto.getEmail())
                 .password(pe.encode(workerMemberDto.getPassword())).name(workerMemberDto.getName())
                 .phoneNumber(workerMemberDto.getPhoneNumber()).birthday(workerMemberDto.getBirthday())
@@ -59,12 +59,14 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
     }
 
     private void storeFiles(WorkerMemberDto workerMemberDto, WorkerMember data) throws IOException {
-        if (workerMemberDto.getFname() != null) {
+        System.out.println(workerMemberDto.getFname() === null);
+
+        if (workerMemberDto.getFname().isEmpty() == false) {
             String convertedFName = fileManager.convertAndStore(workerMemberDto.getFname());
             data.setFName(convertedFName);
         }
 
-        if (workerMemberDto.getResume() != null) {
+        if (workerMemberDto.getResume().isEmpty() == false) {
             String convertedResume = fileManager.convertAndStore(workerMemberDto.getResume());
             data.setResume(convertedResume);
         }
@@ -72,14 +74,12 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 
     @Override
     public void joinC(CorporateMemberDto corporateMemberDto, AdditionalInfoDto additionalInfoDto) {
-        Set<String> aut = Set.of("ROLE_CORP");
         CorporateMember data = CorporateMember.builder().email(corporateMemberDto.getEmail())
-                .password(pe.encode(corporateMemberDto.getPassword())).repName(corporateMemberDto.getRepName())
+                .password(corporateMemberDto.getPassword()).repName(corporateMemberDto.getRepName())
                 .repPhoneNumber(corporateMemberDto.getRepPhoneNumber()).corpNo(corporateMemberDto.getCorpNo())
                 .corpName(corporateMemberDto.getCorpName()).industryField(corporateMemberDto.getIndustryField())
                 .corpAddress(corporateMemberDto.getCorpAddress())
-                .establishedDate(corporateMemberDto.getEstablishedDate()).roles(aut).build();
-        System.out.println("corporation entity built");
+                .establishedDate(corporateMemberDto.getEstablishedDate()).build();
         AdditionalInfo inData = AdditionalInfo.builder().prefJob(additionalInfoDto.getPrefJob())
                 .prefMajor(additionalInfoDto.getPrefMajor())
                 .prefExp(additionalInfoDto.getPrefExp()).expMonths(additionalInfoDto.getExpMonths())
@@ -110,20 +110,15 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println("MemberServiceImpl : parameter username " + username);
-        if (workerMemberRepository.findByEmail(username).isPresent()) {
+        if (!workerMemberRepository.findByEmail(username).isPresent()) {
+            new UsernameNotFoundException("UsernameNotFoundException");
+            return null;
+        } else {
             WorkerMember d = workerMemberRepository.findByEmail(username).get();
             System.out.println(d);
             SecureDTO data = new SecureDTO(d);
-            System.out.println("SecureDTO(Worker Type) : " + data);
+            System.out.println("MemberServiceImpl>else : SecureDTO " + data);
             return data;
-        } else if (corporateMemberRepository.findByEmail(username).isPresent()) {
-            CorporateMember d = corporateMemberRepository.findByEmail(username).get();
-            System.out.println(d);
-            SecureDTO data = new SecureDTO(d);
-            System.out.println("SecureDTO(Corporate Type) : " + data);
-            return data;
-        } else {
-            throw new UsernameNotFoundException("No Data");
         }
     }
 
@@ -132,7 +127,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
         WorkerMember test = WorkerMember.builder().email("worker@test.com").password(pe.encode("1234567890!"))
                 .name("name")
                 .phoneNumber("01011112222").birthday(LocalDate.now()).gender('F').finding(false).address("aaaaa")
-                .roles(Set.of("ROLE_WORKER")).build();
+                .roles(List.of("ROLE_WORKER")).build();
         System.out.println(workerMemberRepository.save(test));
     }
 }

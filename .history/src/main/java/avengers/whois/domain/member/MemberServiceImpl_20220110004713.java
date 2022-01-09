@@ -79,7 +79,6 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
                 .corpName(corporateMemberDto.getCorpName()).industryField(corporateMemberDto.getIndustryField())
                 .corpAddress(corporateMemberDto.getCorpAddress())
                 .establishedDate(corporateMemberDto.getEstablishedDate()).roles(aut).build();
-        System.out.println("corporation entity built");
         AdditionalInfo inData = AdditionalInfo.builder().prefJob(additionalInfoDto.getPrefJob())
                 .prefMajor(additionalInfoDto.getPrefMajor())
                 .prefExp(additionalInfoDto.getPrefExp()).expMonths(additionalInfoDto.getExpMonths())
@@ -123,7 +122,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
             System.out.println("SecureDTO(Corporate Type) : " + data);
             return data;
         } else {
-            throw new UsernameNotFoundException("No Data");
+            throw new UsernameNotFoundException("No Data")
         }
     }
 

@@ -59,6 +59,7 @@ public class SecureDTO extends User {
     }
 
     // variables for Worker Member from here
+
     private String name;
     private String phoneNumber;
     private LocalDate birthday;
