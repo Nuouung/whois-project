@@ -26,7 +26,7 @@
       function checkEmailAvailability() {
         userinput = $("#em").val();
         $.ajax({
-          url: "/member/emailCheck",
+          url: "/member/emailCheck_W",
           type: "post",
 
           data: {
@@ -48,7 +48,6 @@
         if (pwRule.test(userinput) && !emptyCheck.test(userinput)) {
           $("#pw").css("border", "2px solid green");
           $("#pw").css("color", "green");
-          $("#errors").text("");
           return true;
         } else {
           $("#pw").css("border", "2px solid red");
@@ -63,7 +62,6 @@
         if (pnRule.test(userinput) && !emptyCheck.test(userinput)) {
           $("#pn").css("border", "2px solid green");
           $("#pn").css("color", "green");
-          $("#errors").text("");
           return true;
         } else {
           $("#pn").css("border", "2px solid red");
@@ -78,7 +76,6 @@
         if (emRule.test(userinput) && !emptyCheck.test(userinput)) {
           $("#em").css("border", "2px solid green");
           $("#em").css("color", "green");
-          $("#errors").text("");
           return true;
         } else {
           $("#em").css("border", "2px solid red");
@@ -98,7 +95,6 @@
         } else {
           $("#uname").css("border", "2px solid green");
           $("#uname").css("color", "green");
-          $("#errors").text("");
           return true;
         }
       }
@@ -108,12 +104,11 @@
         if (emptyCheck.test(userinput) || userinput == "") {
           $("#bd").css("border", "2px solid red");
           $("#bd").css("color", "red");
-          $("#errors").text("생년월일을 정확하게 선택해주세요.");
+          $("#errors").text("생년월일을 정확하게 입력해주세요.");
           return false;
         } else {
           $("#bd").css("border", "2px solid green");
           $("#bd").css("color", "green");
-          $("#errors").text("");
           return true;
         }
       }
@@ -123,10 +118,10 @@
           !document.getElementById("maleSelector").checked &&
           !document.getElementById("femaleSelector").checked
         ) {
-          $("#errors").text("성별을 선택해주세요.");
+          $("#emptyGender").text("필수선택");
           return false;
         } else {
-          $("#errors").text("");
+          $("#emptyGender").text("");
           return true;
         }
       }

@@ -1,6 +1,7 @@
 package avengers.whois.web.member;
 
 import avengers.whois.domain.member.MemberService;
+import avengers.whois.domain.member.WorkerMember;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,7 +45,7 @@ public class MemberController {
 
     @ResponseBody
     @PostMapping("/emailCheck")
-    public String checkAvailabilityEmail(String tempEmail) {
+    public String checkAvailabilityEmail_W(String tempEmail) {
         return memberService.checkEmail(tempEmail);
     }
 

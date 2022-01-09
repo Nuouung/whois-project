@@ -1,6 +1,7 @@
 package avengers.whois.web.member;
 
 import avengers.whois.domain.member.MemberService;
+import avengers.whois.domain.member.WorkerMember;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
