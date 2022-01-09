@@ -40,6 +40,7 @@ public class MemberController {
     }
 
     @PostMapping("/w_signup")
+
     public String wJoinSubmit(WorkerMemberDto workerMemberDto, AdditionalInfoDto additionalInfoDto) throws IOException {
 
         memberService.joinW(workerMemberDto, additionalInfoDto);

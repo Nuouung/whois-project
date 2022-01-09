@@ -4,11 +4,13 @@ import avengers.whois.web.member.CorporateMemberDto;
 import avengers.whois.web.member.AdditionalInfoDto;
 import avengers.whois.web.member.WorkerMemberDto;
 
+import java.io.IOException;
+
 public interface MemberService {
 
     String checkEmail(String tempEmail);
 
-    void joinW(WorkerMemberDto workerMemberDto, AdditionalInfoDto optionalInfoDto);
+    void joinW(WorkerMemberDto workerMemberDto, AdditionalInfoDto optionalInfoDto) throws IOException;
 
     void joinC(CorporateMemberDto corporateMemberDto, AdditionalInfoDto additionalInfoDto);
 

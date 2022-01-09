@@ -34,7 +34,7 @@ public class AdditionalInfo {
     @Column(nullable = true)
     private String prefJob; // prefered job 직무
     @Column(nullable = true)
-    private String prefMajor; // prefered major 전공
+    private String prefMajor; // prefered major 전공예이~
     @Column(nullable = true)
     private String prefExp; // prefered experience 경력정보 (신입 혹은 경력 여부, 타입은 추가논의 후 확정)
     @Column(nullable = true)

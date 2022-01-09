@@ -76,4 +76,12 @@ public class WorkerMember implements Member {
     private LocalDateTime createdDate;
     @LastModifiedDate
     private LocalDateTime modifiedDate;
+
+    public void setFName(String fname) {
+        this.fname = fname;
+    }
+
+    public void setResume(String resume) {
+        this.resume = resume;
+    }
 }
