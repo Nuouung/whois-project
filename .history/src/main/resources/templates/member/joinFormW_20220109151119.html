@@ -152,12 +152,19 @@
 
       function finalCheck() {
         if (!emCheckRule()) return false;
+        alert("1");
         if (!pwCheckRule()) return false;
+        alert("2");
         if (!naCheckRule()) return false;
+        alert("3");
         if (!pnCheckRule()) return false;
+        alert("4");
         if (!bdCheckRule()) return false;
+        alert("5");
         if (!gdCheck()) return false;
+        alert("6");
         checkEmailAvailability();
+        alert("7");
       }
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -174,7 +181,7 @@
     </section>
     <section class="formArea">
       <p class="pageName">SIGN UP</p>
-      <form name="jform" th:action="@{/member/w_signup}" method="post">
+      <form name="jform" action="/member/w_signup" method="post">
         <input
           type="text"
           name="email"

@@ -2,7 +2,6 @@ package avengers.whois.web.member;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -35,7 +34,7 @@ public class WorkerMemberDto {
     // resume
     private String resume;// 이력서 파일이름 (새이름)
 
-    private List<String> roles;
+    private List<String> roles
 
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;

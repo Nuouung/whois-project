@@ -1,14 +1,10 @@
 package avengers.whois.domain.member;
 
-import java.time.LocalDate;
 import java.util.List;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import avengers.whois.SecurityThings.SecureDTO;
@@ -24,7 +20,6 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
     private final WorkerMemberRepository workerMemberRepository;
     private final CorporateMemberRepository corporateMemberRepository;
     private final AdditionalInfoRepository additionalInfoRepository;
-    private final PasswordEncoder pe;
 
     @Override
     public String checkEmail(String tempEmail) {
@@ -38,12 +33,11 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 
     @Override
     public void joinW(WorkerMemberDto workerMemberDto, AdditionalInfoDto additionalInfoDto) {
-        List<String> aut = List.of("ROLE_WORKER");
         WorkerMember data = WorkerMember.builder().email(workerMemberDto.getEmail())
-                .password(pe.encode(workerMemberDto.getPassword())).name(workerMemberDto.getName())
+                .password(workerMemberDto.getPassword()).name(workerMemberDto.getName())
                 .phoneNumber(workerMemberDto.getPhoneNumber()).birthday(workerMemberDto.getBirthday())
                 .gender(workerMemberDto.getGender()).finding(workerMemberDto.isFinding())
-                .address(workerMemberDto.getAddress()).roles(aut).build();
+                .address(workerMemberDto.getAddress()).build();
         AdditionalInfo inData = AdditionalInfo.builder().prefJob(additionalInfoDto.getPrefJob())
                 .prefMajor(additionalInfoDto.getPrefMajor())
                 .prefExp(additionalInfoDto.getPrefExp()).expMonths(additionalInfoDto.getExpMonths())
@@ -92,18 +86,11 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
             new UsernameNotFoundException("UsernameNotFoundException");
             return null;
         } else {
-            WorkerMember d = workerMemberRepository.findByEmail(username).get();
-            SecureDTO data = new SecureDTO(d);
+            SecureDTO d = workerMemberRepository.findByEmail(username).get();
+            List<SecureDTO> data = workerMemberRepository.findByEmail(username).stream()
+                    .map(a -> new SecureDTO(a)).toList();
             return data;
-        }
-    }
 
-    @Override
-    public void test1() {
-        WorkerMember test = WorkerMember.builder().email("worker@test.com").password(pe.encode("1234567890!"))
-                .name("name")
-                .phoneNumber("01011112222").birthday(LocalDate.now()).gender('F').finding(false).address("aaaaa")
-                .roles(List.of("ROLE_WORKER")).build();
-        workerMemberRepository.save(test);
+        }
     }
 }

@@ -3,7 +3,6 @@ package avengers.whois.domain.member;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.ArrayList;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;

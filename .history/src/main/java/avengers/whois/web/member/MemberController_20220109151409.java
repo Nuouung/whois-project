@@ -15,12 +15,6 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @GetMapping("/test1")
-    public String createTest1() {
-        memberService.test1();
-        return "redirect:/";
-    }
-
     @GetMapping("/info")
     public String toMemberInfo() {
         return "/member/memberInfo";

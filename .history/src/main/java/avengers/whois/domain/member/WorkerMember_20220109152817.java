@@ -2,8 +2,8 @@ package avengers.whois.domain.member;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
-import java.util.ArrayList;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -68,7 +68,7 @@ public class WorkerMember implements Member {
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
-    private List<String> roles = new ArrayList<>();
+    private List<String> roles = new HashSet<>();
 
     @CreatedDate
     private LocalDateTime createdDate;

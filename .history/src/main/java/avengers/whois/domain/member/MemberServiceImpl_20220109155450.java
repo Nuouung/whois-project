@@ -100,10 +100,8 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 
     @Override
     public void test1() {
-        WorkerMember test = WorkerMember.builder().email("worker@test.com").password(pe.encode("1234567890!"))
-                .name("name")
+        WorkerMember test = WorkerMember.builder().email("worker@test.com").password(pe.encode("1234")).name("name")
                 .phoneNumber("01011112222").birthday(LocalDate.now()).gender('F').finding(false).address("aaaaa")
                 .roles(List.of("ROLE_WORKER")).build();
-        workerMemberRepository.save(test);
     }
 }
