@@ -2,10 +2,14 @@ package avengers.whois.domain.member;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.ArrayList;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,12 +24,14 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Builder
 @NoArgsConstructor
+@ToString
 @AllArgsConstructor
 @Table(name = "worker")
 public class WorkerMember implements Member {
@@ -61,6 +67,10 @@ public class WorkerMember implements Member {
     // resume
     @Column(nullable = true)
     private String resume; // 이력서 파일이름 (새이름)
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Builder.Default
+    private List<String> roles = new ArrayList<>();
 
     @CreatedDate
     private LocalDateTime createdDate;

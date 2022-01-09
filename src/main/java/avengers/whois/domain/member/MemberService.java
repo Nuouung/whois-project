@@ -17,4 +17,6 @@ public interface MemberService {
     AdditionalInfoDto getAdditionalS(String email, String password);
 
     WorkerMemberDto getBasicS(String email, String password);
+
+    void test1();
 }
