@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>whois</title>
+    <link
+      rel="stylesheet"
+      href="../static/css/common.css"
+      th:href="@{/css/common.css}"
+    />
+    <link
+      rel="stylesheet"
+      href="../static/css/home.css"
+      th:href="@{/css/home.css}"
+    />
+    <script defer src="../static/js/home.js" th:src="@{js/home.js}"></script>
+  </head>
+  <body>
+    <section class="container"
+      <article class="sectionA">
+        
+        <h2>LOGIN</h2>
+        <form
+          id="loginForm"
+          action="home.html"
+          th:action
+        
+          method="post"
+        >
+          <!-- th:object="${member}" -->
+          <article class="inner_container">
+            <div>
+              <div>
+                <input
+                  type="radio"
+                  id="individual"
+                  
+                  th:value="individual"
+                />
+                <!-- th:field="*{memberType}" -->
+                <label for="individual">개인 로그인</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="company"
+                  
+                  th:value="company"
+                />
+                <!-- th:field="*{memberType}" -->
+                <label for="company">기업 로그인</label>
+              </div>
+            </div>
+            <input
+              type="text"
+              name="email"
+              id="email"
+              th:field="*{email}"
+              placeholder="이메일을 입력하세요."
+            />
+            <input
+              type="password"
+              name="password"
+              id="password"
+              th:field="*{password}"
+              placeholder="비밀번호를 입력하세요."
+            />
+            <button id="formButton" type="submit" class="submit_button">
+              로그인
+            </button>
+          </article>
+        </form>
+        <article class="inner_container">
+          <div>
+            <a href="/member/join_worker">개인 회원가입</a>
+            <div>|</div>
+            <a href="/member/join_corporate">기업 회원가입</a>
+          </div>
+        </article>
+      </article>
+      <article class="sectionB">
+        <img
+          src="../static/imgs/logo/whois_logo_sub_white.png"
+          th:src="@{/imgs/logo/whois_logo_sub_white.png}"
+          class="logo_image"
+        />
+      </article>
+    </section>
+  </body>
+</html>
