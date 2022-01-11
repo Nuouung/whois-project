@@ -64,12 +64,6 @@ function validFailCheck() {
   if (!radioCheck()) return true;
   if (!emailCheck()) return true;
   if (!passwordCheck()) return true;
-  let answer;
-  if(document.getElementById("individual").checked){
-    answer = document.getElementById("emailr").value +"/"+ document.getElementById("individual").value;
-  } else {
-    answer = document.getElementById("emailr").value +"/"+ document.getElementById("company").value;
-  }
-  document.getElementById("email").value=answer;
+  document.getElementById("email").value=emailForm.value+"."+document.getElementById("memberType").value;
   return false;
 }

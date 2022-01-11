@@ -66,9 +66,9 @@ function validFailCheck() {
   if (!passwordCheck()) return true;
   let answer;
   if(document.getElementById("individual").checked){
-    answer = document.getElementById("emailr").value +"/"+ document.getElementById("individual").value;
+    answer = document.getElementById("emailr").value +"."+ document.getElementById("individual").value;
   } else {
-    answer = document.getElementById("emailr").value +"/"+ document.getElementById("company").value;
+    answer = document.getElementById("emailr").value +"."+ document.getElementById("company").value;
   }
   document.getElementById("email").value=answer;
   return false;

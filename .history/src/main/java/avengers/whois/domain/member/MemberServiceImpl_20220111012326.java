@@ -23,7 +23,9 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService, UserDetailsService {
 
+    // 회원테이블 통합으로 repository 도 하나만 사용
     private final NewMemberRepository newMemberRepository;
+    // additional 테이블은 이제 1개의 pk만을 가짐.
     private final AdditionalInfoRepository additionalInfoRepository;
     private final PasswordEncoder pe;
     private final FileManager fileManager;
@@ -115,18 +117,10 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
     // 있는 SecureDTO돌려줌
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("username : " + username);
-        String[] divided = username.split("/"); // home.html에서 넘어온 정보를 / 를 기준으로 나눔
-        System.out.println(divided[0] + "  ///////  " + divided[1]); // 근데 email에 /가 포함될 리 없으니 두개로 나뉠거임
-        Optional<NewMember> a = newMemberRepository.findById(divided[0]); // 그중 첫 원소(앞에거)가 입력받은 이메일
+        Optional<NewMember> a = newMemberRepository.findById(username);
         if (a.isPresent()) {
-            if (a.get().getMemberType() == (divided[1].charAt(0))) { // 두번째 원소(뒤에거)가 기업/개인 체크해서 넘어온 memberType
-                return new SecureDTO(a.get());
-            }
-            System.out.println("memberType not match");
-            throw new UsernameNotFoundException("User with " + username + " does not exist");
+            return new SecureDTO(a.get());
         } else {
-            System.out.println("username not exist");
             throw new UsernameNotFoundException("User with " + username + " does not exist");
         }
     }

@@ -38,7 +38,6 @@
                 <input
                   type="radio"
                   id="individual"
-                  name="memberType"
                   th:field="*{memberType}"
                   th:value="w"
                 /><label for="individual">개인 로그인</label>
@@ -47,7 +46,6 @@
                 <input
                   type="radio"
                   id="company"
-                  name="memberType"
                   th:field="*{memberType}"
                   th:value="c"
                 /><label for="company">기업 로그인</label>
@@ -55,11 +53,11 @@
             </div>
             <input
               type="text"
-              name="emailr"
-              id="emailr"
+              name="email"
+              id="email"
+              th:field="*{email}"
               placeholder="이메일을 입력하세요."
             />
-            <input type="text" th:field="*{email}" hidden name="email" id= />
             <input
               type="password"
               name="password"

@@ -120,7 +120,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
         System.out.println(divided[0] + "  ///////  " + divided[1]); // 근데 email에 /가 포함될 리 없으니 두개로 나뉠거임
         Optional<NewMember> a = newMemberRepository.findById(divided[0]); // 그중 첫 원소(앞에거)가 입력받은 이메일
         if (a.isPresent()) {
-            if (a.get().getMemberType() == (divided[1].charAt(0))) { // 두번째 원소(뒤에거)가 기업/개인 체크해서 넘어온 memberType
+            if (a.get().getMemberType() == (divided[1].charAt(0))) { // 두번째 원로(뒤에거)가 기업/개인 체크해서 넘어온 memberType
                 return new SecureDTO(a.get());
             }
             System.out.println("memberType not match");

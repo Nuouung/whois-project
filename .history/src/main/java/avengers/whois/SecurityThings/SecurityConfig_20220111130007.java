@@ -21,7 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/", "/login", "/member/join_worker", "/trylogin", "/member/join_corporate",
                         "/member/signup",
-                        "/member/emailCheck")
+                        "/member/emailCheck", "/logout")
                 .permitAll()
                 .antMatchers("/member/info", "/loadAdditional", "/loadBasic").hasRole("USER")
                 .anyRequest().authenticated()
@@ -31,7 +31,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/")
                 .usernameParameter("email")
                 .defaultSuccessUrl("/member/info")
-                .failureUrl("/?error"); // 로그인 실패 시 404error 발생해 추가
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/");
     }
 
     @Bean

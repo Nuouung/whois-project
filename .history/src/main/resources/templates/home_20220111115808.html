@@ -27,7 +27,7 @@
         <h2>LOGIN</h2>
         <form
           id="loginForm"
-          action="home.html"
+          action="/login"
           th:action
           th:object="${member}"
           method="post"
@@ -38,16 +38,14 @@
                 <input
                   type="radio"
                   id="individual"
-                  name="memberType"
                   th:field="*{memberType}"
-                  th:value="w"
+                  th:value="i"
                 /><label for="individual">개인 로그인</label>
               </div>
               <div>
                 <input
                   type="radio"
                   id="company"
-                  name="memberType"
                   th:field="*{memberType}"
                   th:value="c"
                 /><label for="company">기업 로그인</label>
@@ -55,11 +53,11 @@
             </div>
             <input
               type="text"
-              name="emailr"
-              id="emailr"
+              name="email"
+              id="email"
+              th:field="*{email}"
               placeholder="이메일을 입력하세요."
             />
-            <input type="text" th:field="*{email}" hidden name="email" id= />
             <input
               type="password"
               name="password"

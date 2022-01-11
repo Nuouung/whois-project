@@ -28,10 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .loginProcessingUrl("/")
+                .loginProcessingUrl("/?error")
                 .usernameParameter("email")
-                .defaultSuccessUrl("/member/info")
-                .failureUrl("/?error"); // 로그인 실패 시 404error 발생해 추가
+                .defaultSuccessUrl("/member/info");
     }
 
     @Bean

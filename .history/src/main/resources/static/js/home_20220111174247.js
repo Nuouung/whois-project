@@ -66,10 +66,10 @@ function validFailCheck() {
   if (!passwordCheck()) return true;
   let answer;
   if(document.getElementById("individual").checked){
-    answer = document.getElementById("emailr").value +"/"+ document.getElementById("individual").value;
+    answer = document.getElementById("emailr").val() +"."+ document.getElementById("individual").val();
   } else {
-    answer = document.getElementById("emailr").value +"/"+ document.getElementById("company").value;
+    answer = document.getElementById("emailr").val() +"."+ document.getElementById("company").val();
   }
-  document.getElementById("email").value=answer;
+  document.getElementById("email").val(answer);
   return false;
 }

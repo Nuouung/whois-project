@@ -4,7 +4,7 @@ const emailValidate =
 const passwordValidate = /^(?=.*[a-zA-Z0-9])(?=.*\W).{10,20}$/;
 
 const loginForm = document.getElementById("loginForm");
-const emailForm = document.getElementById("emailr");
+const emailForm = document.getElementById("email");
 const passwordForm = document.getElementById("password");
 const formButton = document.getElementById("formButton");
 const emailFailText = document.getElementById("emailFailText");
@@ -64,12 +64,6 @@ function validFailCheck() {
   if (!radioCheck()) return true;
   if (!emailCheck()) return true;
   if (!passwordCheck()) return true;
-  let answer;
-  if(document.getElementById("individual").checked){
-    answer = document.getElementById("emailr").value +"/"+ document.getElementById("individual").value;
-  } else {
-    answer = document.getElementById("emailr").value +"/"+ document.getElementById("company").value;
-  }
-  document.getElementById("email").value=answer;
+  emailForm.value(emailForm.value+document.getElementById("memberType").value);
   return false;
 }

@@ -30,8 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .loginProcessingUrl("/")
                 .usernameParameter("email")
-                .defaultSuccessUrl("/member/info")
-                .failureUrl("/?error"); // 로그인 실패 시 404error 발생해 추가
+                .defaultSuccessUrl("/member/info");
     }
 
     @Bean
