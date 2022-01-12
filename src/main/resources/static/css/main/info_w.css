@@ -1,0 +1,70 @@
+@charset "UTF-8";
+main{
+	width: 100%;
+	margin: 10px 0;
+}
+main>.wrap{
+	margin: 0 auto;
+	
+}
+#p_img{
+	position: block;
+	border: 1px solid #a9a9a9;
+	height: 400px;
+	width: 300px;
+	border-radius: 8px;
+	
+	
+}
+.p_Info{
+	margin-left: 1em;
+	width: 800px;
+	height: 400px;
+	font-size: x-large;
+	border: 1px solid #a9a9a9;
+	border-radius: 8px;
+}
+.p_Info dl{
+	padding-left: 2em;
+}
+.p_Info dl dt{
+	position: inline-block;
+	width: 6em;
+	float: left;
+	padding-right: 1em;
+}
+.p_Info dl dd{
+	font-weight: 700;
+}
+.p_Info dl{
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+#p_total>.wrap{
+	margin-top: 5px;
+}
+#res{
+	padding: 0 2em;
+	margin-top: 10px;
+}
+#res a{
+	background-color: #ff286e;
+	border-radius: 4px;
+	font-size: x-large;
+	padding: 0.5em;
+	color: white;
+	width: 50%;
+	text-align: center;
+}
+.port {
+	margin-left: 1em;
+}
+#spe_info {
+	position: inline-block;
+	border: 1px solid #a9a9a9;
+	height: 100%;
+	width: 1125px;
+	border-radius: 8px;
+	padding: 10px 48px;
+	margin-top: 24px;
+}
