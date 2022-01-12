@@ -35,8 +35,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/?error")// 로그인 실패 시 404error 발생해 추가
                 .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
-                // 이후 CSRF 사용 시 Post방식으로 변경하면서 logoutUrl 로 교체
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET")) // 이후 CSRF 사용 시 Post방식으로 변경하면서
+                                                                                   // logoutUrl 로 교체
                 .logoutSuccessUrl("/");
     }
 
