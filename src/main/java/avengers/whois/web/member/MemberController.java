@@ -21,7 +21,7 @@ public class MemberController {
 
     @GetMapping("/info")
     public String toMemberInfo() {
-        return "/member/memberInfo";
+        return "member/memberInfo";
     }
 
     @GetMapping("/join_worker")

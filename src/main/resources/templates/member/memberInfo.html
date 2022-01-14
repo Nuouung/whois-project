@@ -71,8 +71,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
       <th:block >
         <div sec:authorize="isAuthenticated()">
           <span sec:authentication="principal"></span>
+          <span sec:authentication="principal.username"></span>
+          <span sec:authentication="principal.memberType"></span>
         </div>
-
         <div>
           <span>Prefered Job : </span>
           <span id="pjob"></span>
@@ -88,6 +89,5 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
         </div>
       </th:block>
     </main>
-
   </body>
 </html>

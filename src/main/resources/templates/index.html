@@ -10,7 +10,6 @@
     <a
       th:text="${#session}? |로그아웃| : |로그인 창으로 이동|"
       th:href="${#session}? @{/logout} : @{/login}"
-      >로그인 창으로 이동</a
-    >
+    >로그인 창으로 이동</a>
   </body>
 </html>
