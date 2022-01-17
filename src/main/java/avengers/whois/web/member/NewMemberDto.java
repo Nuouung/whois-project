@@ -2,9 +2,11 @@ package avengers.whois.web.member;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -40,4 +42,6 @@ public class NewMemberDto {
     private String corpNo; // 사업자번호
     private String corpName; // 사업자명
     private String industryField; // 업종
+    
+    List<MultipartFile> file;
 }

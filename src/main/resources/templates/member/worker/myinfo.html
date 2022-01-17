@@ -52,8 +52,12 @@
 					</div>
 					<div>
 						<div id="res" class="flex">
-							<a href="/rsumdownload">이력서 다운로드</a>
-							<a href="/portdownload" class="port">포트폴리오 다운로드</a>
+							<Form method="post" action="/rsumUpload" enctype="multipart/form-data">
+								<input type="file">이력서 업로드(단일?)
+							</Form>
+							<Form method="post" action="/portUpload" enctype="multipart/form-data">
+								<input type="file" class="port">포트폴리오업로드(다중)
+							</Form>
 						</div>
 					</div>	
 				</div>

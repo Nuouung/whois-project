@@ -4,19 +4,24 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import avengers.whois.domain.file.MultiFile;
 import avengers.whois.web.member.NewMemberDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -100,4 +105,11 @@ public class NewMember {
         }
         return data;
     }
+    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "email")
+    private List<MultiFile> file;
+    
+    
+    
 }
